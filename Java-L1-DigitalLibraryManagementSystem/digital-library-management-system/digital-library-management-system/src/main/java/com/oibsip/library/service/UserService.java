@@ -1,47 +1,60 @@
 package com.oibsip.library.service;
 
+import com.oibsip.library.dto.LoginRequest;
+import com.oibsip.library.dto.LoginResponse;
 import com.oibsip.library.dto.RegisterRequest;
 import com.oibsip.library.entity.User;
 import com.oibsip.library.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 @Service
-public class AuthService {
+public class UserService { // Or AuthService
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    // Dependency Injection via Constructor
-    public AuthService(UserRepository userRepository) {
+    // Constructor injection
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    /**
-     * Handles registration business logic.
-     * Throws a runtime exception if the email is already taken.
-     */
+    // 1. Your Existing Registration Logic
     public String registerUser(RegisterRequest request) {
-        // 1. Check if email already exists in our system
-        Optional<User> existingUser = userRepository.findByEmail(request.getEmail());
-        if (existingUser.isPresent()) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new RuntimeException("Email is already registered!");
         }
 
-        // 2. Create a new User Entity instance
-        User newUser = new User();
-        newUser.setName(request.getName());
-        newUser.setEmail(request.getEmail());
+        User user = new User();
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        // Encode password using BCrypt before saving
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole("USER"); // Default role
 
-        // 3. For Day 3, we simulate hashing (we will link the actual BCrypt encoder component on Day 4)
-        // This keeps it running cleanly before Spring Security configuration blocks our API endpoints
-        String simulatedHash = "[BCRYPT_HASHEDED_]" + request.getPassword();
-        newUser.setPassword(simulatedHash);
-
-        newUser.setRole("USER");
-
-        // 4. Commit to MySQL via JPA
-        userRepository.save(newUser);
-
+        userRepository.save(user);
         return "User registered successfully!";
+    }
+
+    // 2. New Login Logic
+    public LoginResponse login(LoginRequest request) {
+        // Find user by email
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + request.getEmail()));
+
+        // Compare plain text password input with BCrypt hash in database
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid password credentials");
+        }
+
+        // Return successful login token bundle
+        return new LoginResponse(
+                "Login Successful!",
+                user.getEmail(),
+                user.getRole() != null ? user.getRole() : "USER"
+        );
     }
 }
