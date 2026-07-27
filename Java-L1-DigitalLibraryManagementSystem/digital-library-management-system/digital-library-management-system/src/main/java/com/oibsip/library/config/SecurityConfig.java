@@ -1,16 +1,25 @@
 package com.oibsip.library.config;
 
+import com.oibsip.library.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtAuthFilter;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter) {
+        this.jwtAuthFilter = jwtAuthFilter;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -20,18 +29,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 1. Disable CSRF to allow Postman POST requests without tokens
                 .csrf(csrf -> csrf.disable())
-
-                // 2. Disable Frame Options
-                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-
-                // 3. Configure HTTP Request Authorizations
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Allows /api/auth/register and /api/auth/login
-                        .anyRequest().authenticated()
-                );
+                        .requestMatchers("/api/auth/**").permitAll() // Public login/register endpoints
+                        .anyRequest().authenticated()               // Everything else requires a valid JWT!
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Stateless JWT sessions
+                )
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-} // <--- This closing brace was missing!
+}

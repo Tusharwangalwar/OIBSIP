@@ -8,21 +8,20 @@ import com.oibsip.library.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class UserService { // Or AuthService
+public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    // Constructor injection
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    // 👈 2. Updated constructor to inject JwtService
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
-    // 1. Your Existing Registration Logic
     public String registerUser(RegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new RuntimeException("Email is already registered!");
@@ -31,30 +30,30 @@ public class UserService { // Or AuthService
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        // Encode password using BCrypt before saving
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER"); // Default role
+        user.setRole("USER");
 
         userRepository.save(user);
         return "User registered successfully!";
     }
 
-    // 2. New Login Logic
     public LoginResponse login(LoginRequest request) {
-        // Find user by email
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + request.getEmail()));
 
-        // Compare plain text password input with BCrypt hash in database
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid password credentials");
         }
 
-        // Return successful login token bundle
+        // 👈 3. Generate JWT Token
+        String token = jwtService.generateToken(user.getEmail());
+
+        // 👈 4. Pass token into LoginResponse
         return new LoginResponse(
                 "Login Successful!",
                 user.getEmail(),
-                user.getRole() != null ? user.getRole() : "USER"
+                user.getRole() != null ? user.getRole() : "USER",
+                token
         );
     }
 }
