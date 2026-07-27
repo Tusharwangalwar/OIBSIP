@@ -1,6 +1,7 @@
 package com.oibsip.library.security;
 
-import com.oibsip.library.service.JwtService; // 👈 This import fixes the error!
+import com.oibsip.library.service.JwtService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userEmail,
                         null,
-                        null
+                        java.util.Collections.emptyList() // ✅ Pass empty list for authorities
                 );
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);

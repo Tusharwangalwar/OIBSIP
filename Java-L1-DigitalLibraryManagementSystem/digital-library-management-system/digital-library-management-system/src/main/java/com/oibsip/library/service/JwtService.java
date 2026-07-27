@@ -30,18 +30,15 @@ public class JwtService {
                 .compact();
     }
 
-    // 👈 Extract user email from token
     public String extractEmail(String token) {
         return extractClaims(token).getSubject();
     }
 
-    // 👈 Check if token is valid and not expired
     public boolean isTokenValid(String token, String email) {
         return extractEmail(token).equals(email)
                 && !extractClaims(token).getExpiration().before(new Date());
     }
 
-    // 👈 Helper to parse claims
     private Claims extractClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())

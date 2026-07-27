@@ -31,8 +31,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Public login/register endpoints
-                        .anyRequest().authenticated()               // Everything else requires a valid JWT!
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll() // Public login/register & Swagger endpoints
+                        .anyRequest().authenticated() // Everything else requires a valid JWT!
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Stateless JWT sessions
