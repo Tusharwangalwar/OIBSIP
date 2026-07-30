@@ -1,0 +1,49 @@
+/* ===============================
+   Design System Variables
+   =============================== */
+
+:root {
+
+  /* Background */
+  --background: #F8F6F3;
+  --surface: #FFFBFF;
+
+  /* Primary Colors */
+  --primary: #FFA300;
+  --primary-hover: #E89600;
+
+  /* Sidebar */
+  --sidebar: #040B25;
+  --sidebar-hover: #0B163B;
+
+  /* Accent */
+  --accent: #6E552D;
+
+  /* Text */
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B7280;
+  --text-light: #FFFFFF;
+
+  /* Status */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* Border */
+  --border: #E6DDD2;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  /* Shadow */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.08);
+  --shadow-md: 0 8px 25px rgba(0,0,0,.12);
+  --shadow-lg: 0 20px 50px rgba(0,0,0,.15);
+
+  /* Transition */
+  --transition: .3s ease;
+
+}
