@@ -1,0 +1,46 @@
+/* ==========================
+   DIGITAL LIBRARY THEME
+========================== */
+
+:root{
+
+    /* Colors */
+
+    --primary:#D9A441;
+    --primary-hover:#C89228;
+
+    --sidebar:#2B1A0E;
+
+    --background:#F8F3EA;
+
+    --card:#FFFFFF;
+
+    --border:#EFE6D8;
+
+    --text:#2D2D2D;
+
+    --text-light:#7D7D7D;
+
+    --success:#4CAF50;
+
+    --danger:#E53935;
+
+    --warning:#F9A825;
+
+    /* Radius */
+
+    --radius-sm:8px;
+    --radius-md:14px;
+    --radius-lg:22px;
+
+    /* Shadow */
+
+    --shadow:
+
+    0 12px 30px rgba(0,0,0,.08);
+
+    /* Transition */
+
+    --transition:.3s ease;
+
+}

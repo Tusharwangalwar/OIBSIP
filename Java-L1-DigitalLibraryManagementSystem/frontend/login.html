@@ -1,0 +1,114 @@
+<body>
+
+    <div class="login-card">
+
+        <div class="logo-container">
+
+            <img src="assets/images/logo.png" alt="Logo">
+
+            <h2>Digital Library</h2>
+
+            <p>Management System</p>
+
+        </div>
+
+        <div class="login-header">
+
+            <h1>Login</h1>
+
+            <p>Welcome back! Please login to your account.</p>
+
+        </div>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <div class="input-box">
+
+                    <span class="icon">📧</span>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="admin@library.com"
+                        required>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <div class="input-box">
+
+                    <span class="icon">🔒</span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="********"
+                        required>
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="toggle-password">
+
+                        👁️
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="remember">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="remember">
+
+                    Remember me
+
+                </label>
+
+                <a href="#">
+                    Forgot Password?
+                </a>
+
+            </div>
+
+            <button
+                class="btn-login"
+                type="submit">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <div class="register">
+
+            Don't have an account?
+
+            <a href="register.html">
+
+                Register
+
+            </a>
+
+        </div>
+
+    </div>
+
+<script src="assets/js/auth.js"></script>
+
+</body>
