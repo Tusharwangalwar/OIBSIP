@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple, elegant task manager to organize your day.">
+    <title>TaskFlow — Your Daily Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="#" aria-label="TaskFlow home">
+                <span class="brand-icon">✓</span>
+                <span>task<span class="brand-accent">flow</span></span>
+            </a>
+            <span class="topbar-label">YOUR PERSONAL PLANNER</span>
+        </header>
+
+        <main class="main-content">
+            <section class="welcome">
+                <p class="eyebrow">MAKE TODAY COUNT</p>
+                <h1>Your day, <span>your pace.</span></h1>
+                <p class="welcome-text">
+                    A little progress each day adds up to big results.
+                </p>
+            </section>
+
+            <section class="stats" aria-label="Task summary">
+                <article class="stat-card">
+                    <span class="stat-icon pending-icon">◷</span>
+                    <div>
+                        <p class="stat-label">Pending</p>
+                        <p class="stat-number" id="pending-count">0</p>
+                    </div>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon completed-icon">✓</span>
+                    <div>
+                        <p class="stat-label">Completed</p>
+                        <p class="stat-number" id="completed-count">0</p>
+                    </div>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon total-icon">▤</span>
+                    <div>
+                        <p class="stat-label">Total tasks</p>
+                        <p class="stat-number" id="total-count">0</p>
+                    </div>
+                </article>
+            </section>
+
+            <section class="task-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">YOUR WORKSPACE</p>
+                        <h2>My tasks</h2>
+                    </div>
+                    <span class="date-label" id="today-date"></span>
+                </div>
+
+                <form class="task-form" id="task-form">
+                    <label class="visually-hidden" for="task-input">New task</label>
+                    <input
+                        type="text"
+                        id="task-input"
+                        maxlength="200"
+                        placeholder="What needs to get done?"
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="submit" class="add-button">
+                        <span aria-hidden="true">+</span> Add task
+                    </button>
+                </form>
+
+                <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+
+                <div class="task-section">
+                    <div class="list-heading">
+                        <h3>In progress <span class="count-pill" id="pending-pill">0</span></h3>
+                    </div>
+                    <ul class="task-list" id="pending-list"></ul>
+                    <div class="empty-state" id="pending-empty">
+                        <span class="empty-icon">✦</span>
+                        <p>Nothing on your list yet</p>
+                        <span>Add a task above to get started.</span>
+                    </div>
+                </div>
+
+                <div class="task-section completed-section">
+                    <div class="list-heading">
+                        <h3>Completed <span class="count-pill" id="completed-pill">0</span></h3>
+                        <button type="button" class="clear-button" id="clear-completed">
+                            Clear completed
+                        </button>
+                    </div>
+                    <ul class="task-list" id="completed-list"></ul>
+                    <div class="empty-state compact-empty" id="completed-empty">
+                        <p>No completed tasks yet.</p>
+                    </div>
+                </div>
+
+                <footer class="panel-footer">
+                    <span><span class="save-dot"></span> Your tasks are saved on this device</span>
+                    <span id="progress-text">Let's make progress!</span>
+                </footer>
+            </section>
+
+            <p class="closing-note">Stay focused. Keep moving forward. ✨</p>
+        </main>
+
+        <footer class="site-footer">
+            <p>Built with focus and care · TaskFlow</p>
+        </footer>
+    </div>
+</body>
+</html>
