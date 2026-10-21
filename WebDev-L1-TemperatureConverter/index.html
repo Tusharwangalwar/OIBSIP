@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="A simple temperature converter for Celsius, Fahrenheit, and Kelvin.">
+
+    <title>Temperature Converter | OASIS INFOBYTE</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Connect JavaScript -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="brand">Temp<span>Convert.</span></div>
+        <p>OASIS INFOBYTE · LEVEL 1</p>
+    </header>
+
+    <main class="page-container">
+        <section class="converter-card">
+
+            <div class="heading">
+                <div class="temperature-icon" aria-hidden="true">°</div>
+                <p class="eyebrow">SIMPLE. QUICK. ACCURATE.</p>
+                <h1>Temperature <span>Converter</span></h1>
+                <p class="subtitle">
+                    Convert temperatures between Celsius, Fahrenheit,
+                    and Kelvin in seconds.
+                </p>
+            </div>
+
+            <form id="converter-form" novalidate>
+                <div class="form-group">
+                    <label for="temperature">Enter temperature</label>
+                    <input
+                        type="number"
+                        id="temperature"
+                        name="temperature"
+                        step="any"
+                        placeholder="e.g. 25"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="unit">Input unit</label>
+                    <select id="unit" name="unit">
+                        <option value="C">Celsius (°C)</option>
+                        <option value="F">Fahrenheit (°F)</option>
+                        <option value="K">Kelvin (K)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="convert-button">
+                    Convert Temperature <span aria-hidden="true">→</span>
+                </button>
+
+                <p id="error-message" class="error-message" role="alert" aria-live="polite"></p>
+            </form>
+
+            <section class="results" aria-labelledby="results-heading">
+                <div class="results-heading">
+                    <h2 id="results-heading">Conversion results</h2>
+                    <p>All three temperature scales</p>
+                </div>
+
+                <article class="result-card">
+                    <div>
+                        <span class="result-label">Celsius</span>
+                        <p class="result-unit">°C</p>
+                    </div>
+                    <output id="celsius-result" class="result-value">—</output>
+                </article>
+
+                <article class="result-card">
+                    <div>
+                        <span class="result-label">Fahrenheit</span>
+                        <p class="result-unit">°F</p>
+                    </div>
+                    <output id="fahrenheit-result" class="result-value">—</output>
+                </article>
+
+                <article class="result-card">
+                    <div>
+                        <span class="result-label">Kelvin</span>
+                        <p class="result-unit">K</p>
+                    </div>
+                    <output id="kelvin-result" class="result-value">—</output>
+                </article>
+            </section>
+
+            <p class="helper-text">
+                Note: Temperatures below absolute zero are not valid.
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Built with HTML5, CSS3 &amp; JavaScript</p>
+        <p>OASIS INFOBYTE · Web Development and Designing</p>
+    </footer>
+
+</body>
+</html>
