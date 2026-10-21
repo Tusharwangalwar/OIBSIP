@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AccessPoint demo dashboard.">
+    <title>Dashboard | AccessPoint</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="dashboard.js" defer></script>
+</head>
+<body>
+    <main class="dashboard-layout">
+        <header class="dashboard-header">
+            <a class="brand" href="dashboard.html">
+                <span class="brand-mark">A</span>
+                AccessPoint
+            </a>
+            <button class="logout-button" id="logout-button" type="button">
+                Log out
+            </button>
+        </header>
+
+        <section class="dashboard-card">
+            <div class="dashboard-avatar" aria-hidden="true">✦</div>
+            <p class="eyebrow">YOUR PERSONAL SPACE</p>
+            <h1>Welcome, <span id="dashboard-username">there</span>!</h1>
+            <p class="muted dashboard-description">
+                You've successfully signed in to this demonstration dashboard.
+            </p>
+
+            <div class="account-detail">
+                <span>Username</span>
+                <strong id="account-username">—</strong>
+            </div>
+
+            <div class="account-detail">
+                <span>Email address</span>
+                <strong id="account-email">—</strong>
+            </div>
+
+            <p class="dashboard-notice">
+                Demo only: this page uses browser storage, not secure server authentication.
+            </p>
+
+            <button class="primary-button" id="dashboard-logout" type="button">
+                Log out of account
+            </button>
+        </section>
+    </main>
+</body>
+</html>

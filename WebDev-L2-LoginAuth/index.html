@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A learning demo for registration and login form validation.">
+    <title>AccessPoint | Login & Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="auth-layout">
+        <section class="brand-panel">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">A</span>
+                AccessPoint
+            </a>
+
+            <div class="brand-message">
+                <p class="eyebrow">YOUR SPACE. YOUR JOURNEY.</p>
+                <h1>A simpler way to manage your <span>digital world.</span></h1>
+                <p class="muted">
+                    A demonstration authentication interface built with
+                    HTML, CSS and JavaScript.
+                </p>
+            </div>
+
+            <p class="brand-footer">OASIS INFOBYTE · LEVEL 2 · TASK 4</p>
+        </section>
+
+        <section class="form-panel">
+            <div class="auth-card">
+                <div class="mobile-brand">
+                    <span class="brand-mark">A</span> AccessPoint
+                </div>
+
+                <div class="tabs" role="tablist" aria-label="Authentication options">
+                    <button class="tab active" id="login-tab" type="button"
+                            role="tab" aria-selected="true">
+                        Sign in
+                    </button>
+                    <button class="tab" id="register-tab" type="button"
+                            role="tab" aria-selected="false">
+                        Create account
+                    </button>
+                </div>
+
+                <section id="login-view" aria-labelledby="login-heading">
+                    <p class="eyebrow">WELCOME BACK</p>
+                    <h2 id="login-heading">Sign in to your account</h2>
+                    <p class="muted intro">
+                        Enter your email and password to continue.
+                    </p>
+
+                    <form id="login-form">
+                        <label for="login-email">Email address</label>
+                        <input id="login-email" name="email" type="email"
+                               placeholder="you@example.com" autocomplete="email" required>
+
+                        <label for="login-password">Password</label>
+                        <input id="login-password" name="password" type="password"
+                               placeholder="Enter your password"
+                               autocomplete="current-password" required>
+
+                        <p class="form-message" id="login-message"
+                           role="status" aria-live="polite"></p>
+
+                        <button class="primary-button" type="submit">Sign in</button>
+                    </form>
+
+                    <p class="switch-copy">
+                        New here?
+                        <button class="text-button" type="button" data-view="register">
+                            Create an account
+                        </button>
+                    </p>
+                </section>
+
+                <section id="register-view" aria-labelledby="register-heading" hidden>
+                    <p class="eyebrow">GET STARTED</p>
+                    <h2 id="register-heading">Create your account</h2>
+                    <p class="muted intro">A few details to get you started.</p>
+
+                    <form id="register-form">
+                        <label for="register-username">Username</label>
+                        <input id="register-username" name="username" type="text"
+                               minlength="3" maxlength="30"
+                               placeholder="Choose a username"
+                               autocomplete="username" required>
+
+                        <label for="register-email">Email address</label>
+                        <input id="register-email" name="email" type="email"
+                               placeholder="you@example.com"
+                               autocomplete="email" required>
+
+                        <label for="register-password">Password</label>
+                        <input id="register-password" name="password" type="password"
+                               minlength="8" maxlength="128"
+                               placeholder="At least 8 characters"
+                               autocomplete="new-password" required>
+                        <p class="field-hint">Use at least 8 characters.</p>
+
+                        <label for="confirm-password">Confirm password</label>
+                        <input id="confirm-password" name="confirmPassword" type="password"
+                               minlength="8" maxlength="128"
+                               placeholder="Enter your password again"
+                               autocomplete="new-password" required>
+
+                        <p class="form-message" id="register-message"
+                           role="status" aria-live="polite"></p>
+
+                        <button class="primary-button" type="submit">
+                            Create account
+                        </button>
+                    </form>
+
+                    <p class="switch-copy">
+                        Already registered?
+                        <button class="text-button" type="button" data-view="login">
+                            Sign in
+                        </button>
+                    </p>
+                </section>
+
+                <p class="demo-note">
+                    Educational demo only. Do not use a real password or sensitive information.
+                </p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
