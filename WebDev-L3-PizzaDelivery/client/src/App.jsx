@@ -1,7 +1,8 @@
-
+import PizzaBuilder from "./PizzaBuilder";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+
 
 const API_URL = "http://localhost:5000";
 
@@ -98,6 +99,7 @@ function App() {
       </main>
 
       <footer>PizzaCraft · Made with love and extra cheese 🧀</footer>
+    <PizzaBuilder />
     </div>
   );
 }

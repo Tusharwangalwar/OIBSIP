@@ -1,0 +1,144 @@
+
+.pizza-builder {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+  color: #29231f;
+}
+
+.builder-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.builder-eyebrow {
+  color: #d35432;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.builder-header h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  margin: 12px 0;
+}
+
+.builder-header > p:last-child,
+.builder-muted {
+  color: #746b64;
+}
+
+.builder-section {
+  margin: 24px 0;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #eee6df;
+  border-radius: 18px;
+}
+
+.builder-section h2,
+.builder-summary h2 {
+  margin-top: 0;
+}
+
+.builder-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.builder-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 15px;
+  border: 1px solid #e7ddd5;
+  border-radius: 12px;
+  background: #fffaf6;
+  color: #29231f;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.builder-option:hover {
+  border-color: #d35432;
+}
+
+.builder-option.selected {
+  border: 2px solid #d35432;
+  background: #fff0e8;
+}
+
+.builder-option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.builder-summary {
+  position: sticky;
+  bottom: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px 24px;
+  align-items: center;
+  margin-top: 32px;
+  padding: 24px;
+  background: #29231f;
+  color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px #0002;
+}
+
+.builder-summary .builder-muted {
+  color: #d5c8bf;
+}
+
+.builder-summary h2 {
+  margin-bottom: 8px;
+}
+
+.builder-summary p {
+  overflow-wrap: anywhere;
+}
+
+.builder-total {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+}
+
+.builder-total strong {
+  color: #ffbd80;
+  font-size: 28px;
+}
+
+.builder-reset {
+  grid-column: 1 / -1;
+  padding: 12px;
+  border: 1px solid #bda99c;
+  border-radius: 10px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .pizza-builder {
+    padding: 24px 14px 40px;
+  }
+
+  .builder-section {
+    padding: 18px;
+  }
+
+  .builder-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .builder-total {
+    text-align: left;
+  }
+}
