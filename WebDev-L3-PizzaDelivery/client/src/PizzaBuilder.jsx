@@ -19,6 +19,7 @@ function PizzaBuilder() {
   const [vegetables, setVegetables] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [cartMessage, setCartMessage] = useState("");
 
   useEffect(() => {
     async function loadIngredients() {
@@ -65,6 +66,56 @@ function PizzaBuilder() {
         : [...current, id]
     );
   }
+  
+function addToCart() {
+  if (!base || !sauce || !cheese) {
+    setCartMessage("Please select a base, sauce, and cheese.");
+    return;
+  }
+
+  const allIngredients = [
+    ...ingredients.bases,
+    ...ingredients.sauces,
+    ...ingredients.cheese,
+    ...ingredients.vegetables,
+  ];
+
+  const selectedIds = [base, sauce, cheese, ...vegetables];
+
+  const selectedItems = selectedIds
+    .map((id) => allIngredients.find((item) => item._id === id))
+    .filter(Boolean);
+
+  const cartItem = {
+    id: crypto.randomUUID(),
+    name: "Custom Pizza",
+    ingredients: selectedItems.map((item) => ({
+      id: item._id,
+      name: item.name,
+      price: Number(item.price) || 0,
+    })),
+    total,
+    quantity: 1,
+  };
+
+  try {
+    const existingCart = JSON.parse(
+      localStorage.getItem("pizzaCart") || "[]"
+    );
+
+    if (!Array.isArray(existingCart)) {
+      throw new Error("Invalid cart data");
+    }
+
+    existingCart.push(cartItem);
+    localStorage.setItem("pizzaCart", JSON.stringify(existingCart));
+
+    setCartMessage("Custom pizza added to your cart!");
+  } catch {
+    setCartMessage("Unable to save your cart. Please try again.");
+  }
+}
+
 
   function renderOptions(items, selected, onSelect, multiple = false) {
     if (!items.length) {
@@ -162,6 +213,10 @@ function PizzaBuilder() {
           <span>Total</span>
           <strong>₹{total}</strong>
         </div>
+        <button type="button" onClick={addToCart}>
+          Add to cart
+        </button>
+        {cartMessage && <p role="status">{cartMessage}</p>}
         <button
           type="button"
           className="builder-reset"
@@ -174,6 +229,19 @@ function PizzaBuilder() {
         >
           Clear selections
         </button>
+         <button
+        type="button"
+        className="builder-add-cart"
+        onClick={addToCart}
+      >
+        Add to Cart — ₹{total}
+      </button>
+
+      {cartMessage && (
+        <p role="status" aria-live="polite">
+          {cartMessage}
+        </p>
+      )}
       </aside>
     </main>
   );
