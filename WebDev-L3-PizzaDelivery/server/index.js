@@ -7,6 +7,8 @@ const cors = require("cors");
 
 const app = express();
 const pizzaRoute = require('./routes/pizzaRoute');
+const orderRoute = require("./routes/order");
+
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +17,7 @@ app.use("/api/users", require("./routes/user"));
 app.use("/api/pizzas", require("./routes/pizza"));
 app.use("/api/ingredients", require("./routes/ingredient"));
 app.use('/api/pizzas', pizzaRoute);
+app.use("/api/orders", orderRoute);
 
 // Test whether our backend is working
 app.get("/", (req, res) => {

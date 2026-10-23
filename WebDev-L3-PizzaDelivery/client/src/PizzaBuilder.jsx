@@ -67,6 +67,7 @@ function PizzaBuilder() {
     );
   }
   
+
 function addToCart() {
   if (!base || !sauce || !cheese) {
     setCartMessage("Please select a base, sauce, and cheese.");
@@ -110,11 +111,14 @@ function addToCart() {
     existingCart.push(cartItem);
     localStorage.setItem("pizzaCart", JSON.stringify(existingCart));
 
+    window.dispatchEvent(new Event("pizzaCartUpdated"));
+
     setCartMessage("Custom pizza added to your cart!");
   } catch {
     setCartMessage("Unable to save your cart. Please try again.");
   }
 }
+
 
 
   function renderOptions(items, selected, onSelect, multiple = false) {
@@ -225,23 +229,27 @@ function addToCart() {
             setSauce("");
             setCheese("");
             setVegetables([]);
+            setCartMessage("");
           }}
         >
           Clear selections
         </button>
-         <button
-        type="button"
-        className="builder-add-cart"
-        onClick={addToCart}
-      >
-        Add to Cart — ₹{total}
-      </button>
+         
 
-      {cartMessage && (
-        <p role="status" aria-live="polite">
-          {cartMessage}
-        </p>
-      )}
+<button
+  type="button"
+  className="builder-add-cart"
+  onClick={addToCart}
+>
+  Add to Cart — ₹{total}
+</button>
+
+{cartMessage && (
+  <p role="status" aria-live="polite">
+    {cartMessage}
+  </p>
+)}
+
       </aside>
     </main>
   );
